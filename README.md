@@ -1,20 +1,24 @@
-# Virtuoso FPL Dashboard v2
+# Virtuoso FPL Dashboard
 
-Public GitHub Pages dashboard for FPL classic league **1112007**.
+Static Fantasy Premier League dashboard for GitHub Pages.
 
-## Main changes
-- Full league table is always visible on the desktop/TV dashboard.
-- Active chip usage is shown directly on each manager row as WC/FH/BB/TC, with a key and subtle row highlighting.
-- Adds leader, GW king, climber/faller, bad week, most captained, most owned, top differential, captain popularity, manager of the month, performance/position charts, recent GW winners and highest-scoring player.
+## Upload / deploy
 
-## Update an existing repository
-Replace `index.html`, `style.css`, `script.js`, `scripts/update_fpl.py`, and `.github/workflows/update-fpl-data.yml`. Keep `.nojekyll`. Then run the workflow manually once under **Actions**.
+1. Upload **all files and folders** in this package to the root of your GitHub repository.
+2. Keep `.github/workflows/update-fpl-data.yml`, `.nojekyll`, `assets`, `data`, `scripts`, `index.html`, `style.css`, and `script.js` in their existing paths.
+3. In GitHub, open **Actions** and run the FPL update workflow once if required.
+4. GitHub Pages should be configured to publish from the repository root/branch used by the existing setup.
 
-## Fresh setup
-1. Create a public GitHub repository.
-2. Upload all files to the repository root.
-3. If hidden files cannot be uploaded, create `.nojekyll` and `.github/workflows/update-fpl-data.yml` directly in GitHub.
-4. Go to **Settings > Pages > Source > GitHub Actions**.
-5. Run **Actions > Update and deploy FPL dashboard > Run workflow**.
+## What changed in this version
 
-The dashboard is tuned for a 1920x1080 wallboard but includes responsive layouts for smaller screens.
+- Premier League badge added to the top-left header using the supplied artwork.
+- More authentic FPL-inspired typography using Barlow Condensed for headings and Inter for body text.
+- Background moved closer to the supplied FPL Essentials artwork: turquoise/cyan/blue/purple gradient with neon contour-wave accents.
+- Dashboard cards aligned and spaced more consistently.
+- Captain popularity, Manager of the Month and climber/faller panels now make fuller use of their available space.
+- Added subtle borders, gradients, accent lines and background rings to give cards more visual character without compromising readability.
+- Existing data logic, GitHub Actions refresh process, league table, chip indicators and dashboard content remain intact.
+
+## Fonts
+
+The page references Barlow Condensed and Inter from Google Fonts. If Google Fonts cannot load, safe system fallbacks are used automatically.
