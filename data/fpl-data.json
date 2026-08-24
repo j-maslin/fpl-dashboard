@@ -1,9 +1,18 @@
 {
-  "league_id": 1112007,
-  "fetched_at": null,
-  "current_gameweek": null,
+  "generated_at": null,
   "league": {
-    "name": "FPL League Dashboard"
+    "id": 1112007,
+    "name": "Virtuoso FPL"
   },
-  "standings": []
+  "gameweek": {
+    "id": null
+  },
+  "summary": {
+    "manager_count": 0,
+    "average_gw": 0
+  },
+  "standings": [],
+  "players": {},
+  "charts": {},
+  "gameweek_winners": []
 }
