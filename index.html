@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#37003c" />
+  <title>FPL League Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Fantasy Premier League</p>
+        <h1 id="leagueName">League Dashboard</h1>
+        <p class="hero-copy">Live-ish standings for league <strong>1112007</strong>, refreshed automatically by GitHub Actions.</p>
+      </div>
+      <div class="hero-actions">
+        <a id="officialLeagueLink" class="button secondary" href="https://fantasy.premierleague.com/leagues/1112007/standings/c" target="_blank" rel="noopener noreferrer">Open in FPL</a>
+        <button id="refreshButton" class="button primary" type="button">Refresh page</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="statusBanner" class="status-banner" aria-live="polite">
+        Loading league data…
+      </section>
+
+      <section class="stats-grid" aria-label="League summary">
+        <article class="stat-card leader-card">
+          <span class="stat-label">League Leader</span>
+          <strong id="leaderTeam" class="stat-value">—</strong>
+          <span id="leaderManager" class="stat-meta">—</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">GW Top Scorer</span>
+          <strong id="gwLeader" class="stat-value">—</strong>
+          <span id="gwLeaderScore" class="stat-meta">—</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Average GW Score</span>
+          <strong id="averageGw" class="stat-value">—</strong>
+          <span id="currentGameweek" class="stat-meta">—</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Managers</span>
+          <strong id="managerCount" class="stat-value">—</strong>
+          <span class="stat-meta">in this league</span>
+        </article>
+      </section>
+
+      <section class="table-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow dark">Standings</p>
+            <h2>League Table</h2>
+          </div>
+          <div class="panel-tools">
+            <label class="search-box">
+              <span class="sr-only">Search manager or team</span>
+              <input id="searchInput" type="search" placeholder="Search team or manager…" autocomplete="off" />
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="rank-col">Rank</th>
+                <th>Team</th>
+                <th>Manager</th>
+                <th class="number-col">GW</th>
+                <th class="number-col">Total</th>
+                <th class="movement-col">Move</th>
+              </tr>
+            </thead>
+            <tbody id="standingsBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty-state" hidden>No matching managers found.</div>
+        </div>
+      </section>
+
+      <footer>
+        <span id="lastUpdated">Last updated: —</span>
+        <span>Data source: Fantasy Premier League</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
