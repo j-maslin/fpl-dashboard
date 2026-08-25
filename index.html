@@ -23,87 +23,193 @@
           <p>Live-ish standings for league <strong id="leagueId">1112007</strong></p>
         </div>
       </div>
+
       <div class="hero-status">
-        <div class="gw-pill">Gameweek <span id="currentGw">—</span></div>
-        <div class="refresh-pill"><span class="status-dot"></span> Auto-refreshed</div>
-        <div class="last-updated">Updated <span id="lastUpdated">—</span></div>
+        <a class="league-link" id="leagueLink" href="https://fantasy.premierleague.com/leagues/1112007/standings/c" target="_blank" rel="noopener noreferrer">View league <span aria-hidden="true">↗</span></a>
+        <div class="gw-pill">
+          <span>Gameweek <b id="currentGw">—</b></span>
+          <small id="gameweekState">Loading</small>
+        </div>
+        <div class="refresh-pill" id="freshnessPill" title="Waiting for the first data refresh">
+          <span class="status-dot"></span>
+          <span class="refresh-copy">
+            <strong id="freshnessLabel">Auto-refreshed</strong>
+            <small>Updated <span id="lastUpdated">—</span></small>
+          </span>
+        </div>
       </div>
     </header>
 
     <main class="dashboard">
       <section class="top-cards" aria-label="League summary">
         <article class="feature-card leader-card">
-          <div class="round-icon">🏆</div>
-          <div class="card-copy"><span class="label">League leader</span><strong id="leaderTeam">—</strong><span id="leaderManager">—</span></div>
+          <div class="round-icon" aria-hidden="true">🏆</div>
+          <div class="card-copy">
+            <span class="label">League leader</span>
+            <strong id="leaderTeam">—</strong>
+            <span id="leaderManager">—</span>
+          </div>
           <div class="feature-score"><span id="leaderPoints">—</span><small>pts</small></div>
         </article>
+
         <article class="feature-card accent-card">
-          <div class="round-icon purple">🔥</div>
-          <div class="card-copy"><span class="label purple-text">GW top scorer</span><strong id="gwKingTeam">—</strong><span><span id="gwKingManager">—</span> · <b id="gwKingPoints">—</b> pts</span></div>
+          <div class="round-icon purple" aria-hidden="true">🔥</div>
+          <div class="card-copy">
+            <span class="label purple-text">GW top scorer</span>
+            <strong id="gwKingTeam">—</strong>
+            <span><span id="gwKingManager">—</span> · <b id="gwKingPoints">—</b> pts</span>
+          </div>
         </article>
+
         <article class="feature-card accent-card">
-          <div class="round-icon purple">📈</div>
-          <div class="card-copy"><span class="label purple-text">Average GW score</span><strong id="averageGw">—</strong><span>Gameweek <span id="averageGwNumber">—</span></span></div>
+          <div class="round-icon purple" aria-hidden="true">📈</div>
+          <div class="card-copy">
+            <span class="label purple-text">Average GW score</span>
+            <strong id="averageGw">—</strong>
+            <span>League mean · GW <span id="averageGwNumber">—</span></span>
+          </div>
         </article>
+
         <article class="feature-card accent-card">
-          <div class="round-icon purple">👥</div>
-          <div class="card-copy"><span class="label purple-text">Managers</span><strong id="managerCount">—</strong><span>in this league</span></div>
+          <div class="round-icon purple" aria-hidden="true">👥</div>
+          <div class="card-copy">
+            <span class="label purple-text">Managers</span>
+            <strong id="managerCount">—</strong>
+            <span>competing in this league</span>
+          </div>
         </article>
       </section>
 
       <section class="middle-grid">
         <article class="panel standings-panel">
           <div class="panel-heading">
-            <div><span class="panel-kicker">Standings</span><h2>League Table</h2></div>
-            <div class="chip-key" id="chipKey" aria-label="Chip key"></div>
+            <div>
+              <span class="panel-kicker">Standings</span>
+              <h2>League Table</h2>
+            </div>
+            <div class="table-tools">
+              <span class="chip-summary" id="chipSummary">No chips active</span>
+              <div class="chip-key" id="chipKey" aria-label="Chip key"></div>
+            </div>
           </div>
+
           <div class="table-wrap">
             <table class="standings-table">
-              <thead><tr><th>Rank</th><th>Team</th><th>Manager</th><th class="num">GW</th><th class="num">Total</th><th class="num">Move</th><th>Chip</th></tr></thead>
+              <caption class="sr-only">Current Fantasy Premier League mini-league standings</caption>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Team</th>
+                  <th>Manager</th>
+                  <th class="num">GW</th>
+                  <th class="num">Total</th>
+                  <th class="num">Move</th>
+                  <th>Chip</th>
+                </tr>
+              </thead>
               <tbody id="standingsBody"></tbody>
             </table>
           </div>
         </article>
 
-        <aside class="insight-column">
-          <div class="mini-stat-grid">
-            <article class="mini-stat dark"><span class="mini-icon">🏆</span><div><small>Leader</small><strong id="miniLeader">—</strong></div></article>
-            <article class="mini-stat dark"><span class="mini-icon">🔥</span><div><small>GW King</small><strong id="miniGwKing">—</strong><span id="miniGwKingPoints">—</span></div></article>
-            <article class="mini-stat dark"><span class="mini-icon">↗</span><div><small>Climber</small><strong id="climberTeam">—</strong><span class="positive" id="climberMove">—</span></div></article>
-            <article class="mini-stat dark"><span class="mini-icon">☠</span><div><small>Bad week</small><strong id="badWeekTeam">—</strong><span id="badWeekPoints">—</span></div></article>
+        <aside class="insight-column" aria-label="League insights">
+          <div class="quick-metric-grid">
+            <article class="quick-metric dark">
+              <span class="metric-icon" aria-hidden="true">↕</span>
+              <div><small>Lead gap</small><strong id="leadGapValue">—</strong><span id="leadGapDetail">1st to 2nd</span></div>
+            </article>
+            <article class="quick-metric dark">
+              <span class="metric-icon" aria-hidden="true">≈</span>
+              <div><small>Median score</small><strong id="medianGwValue">—</strong><span>this gameweek</span></div>
+            </article>
+            <article class="quick-metric dark">
+              <span class="metric-icon" aria-hidden="true">⚡</span>
+              <div><small>Chips active</small><strong id="activeChipsValue">—</strong><span id="activeChipsDetail">this gameweek</span></div>
+            </article>
+            <article class="quick-metric dark">
+              <span class="metric-icon" aria-hidden="true">🪑</span>
+              <div><small>Bench pain</small><strong id="benchPainValue">—</strong><span id="benchPainDetail">points benched</span></div>
+            </article>
           </div>
 
           <div class="player-stat-grid">
-            <article class="player-stat"><span class="round-icon small purple">C</span><div><small>Most captained</small><strong id="mostCaptained">—</strong><b id="mostCaptainedPct">—</b><span>of managers</span></div></article>
-            <article class="player-stat"><span class="round-icon small purple">👥</span><div><small>Most owned</small><strong id="mostOwned">—</strong><b id="mostOwnedPct">—</b><span>of teams</span></div></article>
-            <article class="player-stat"><span class="round-icon small purple">◎</span><div><small>Top differential</small><strong id="differential">—</strong><b id="differentialPoints">—</b><span id="differentialOwned">—</span></div></article>
+            <article class="player-stat">
+              <span class="round-icon small purple">C</span>
+              <div><small>Most captained</small><strong id="mostCaptained">—</strong><b id="mostCaptainedPct">—</b><span>of managers</span></div>
+            </article>
+            <article class="player-stat">
+              <span class="round-icon small purple" aria-hidden="true">👥</span>
+              <div><small>Most owned</small><strong id="mostOwned">—</strong><b id="mostOwnedPct">—</b><span>of teams</span></div>
+            </article>
+            <article class="player-stat">
+              <span class="round-icon small purple" aria-hidden="true">◎</span>
+              <div><small>Top differential</small><strong id="differential">—</strong><b id="differentialPoints">—</b><span id="differentialOwned">—</span></div>
+            </article>
           </div>
 
           <div class="lower-insight-grid">
             <article class="compact-panel captain-panel">
               <div class="compact-title">Captain popularity</div>
-              <div class="donut-row"><div class="donut" id="captainDonut"><span class="donut-core">C</span></div><div class="legend-list" id="captainLegend"></div></div>
+              <div class="donut-row">
+                <div class="donut" id="captainDonut"><span class="donut-core">C</span></div>
+                <div class="legend-list" id="captainLegend"></div>
+              </div>
             </article>
-            <article class="compact-panel manager-month">
-              <div class="compact-title">Manager of the month</div>
-              <div class="month-content"><div class="star-badge">★</div><div><strong id="motmName">—</strong><b id="motmPoints">—</b><span>last <span id="motmGws">—</span> gameweeks</span></div></div>
+
+            <article class="compact-panel form-panel">
+              <div class="compact-title" id="formTitle">Form leader</div>
+              <div class="form-content">
+                <div class="star-badge" aria-hidden="true">★</div>
+                <div>
+                  <strong id="formName">—</strong>
+                  <b id="formPoints">—</b>
+                  <span id="formDetail">latest available gameweeks</span>
+                </div>
+              </div>
             </article>
+
             <article class="compact-panel movers">
-              <div class="compact-title">Biggest climber / faller</div>
-              <div class="mover-stack"><div class="mover-row up"><b id="bigUp">—</b><span id="bigUpName">—</span></div><div class="mover-row down"><b id="bigDown">—</b><span id="bigDownName">—</span></div></div>
+              <div class="compact-title" id="moversTitle">Biggest movers</div>
+              <div class="mover-stack">
+                <div class="mover-row up" id="upperMoverRow"><b id="bigUp">—</b><span id="bigUpName">—</span></div>
+                <div class="mover-row down" id="lowerMoverRow"><b id="bigDown">—</b><span id="bigDownName">—</span></div>
+              </div>
             </article>
           </div>
         </aside>
       </section>
 
       <section class="bottom-grid">
-        <article class="panel chart-panel"><div class="chart-title">Gameweek performance <span>(top 6)</span></div><div id="performanceChart" class="svg-chart"></div></article>
-        <article class="panel chart-panel"><div class="chart-title">Previous positions <span>(last 6 GW)</span></div><div id="positionChart" class="svg-chart"></div></article>
-        <article class="panel winners-panel"><div class="chart-title">Gameweek winners</div><div id="gwWinners" class="winner-list"></div></article>
-        <article class="panel highest-panel"><div class="chart-title mint">Highest scoring player <span id="highestGwLabel"></span></div><div class="highest-content"><div class="shirt-icon">👕</div><div><strong id="highestPlayer">—</strong><b><span id="highestPlayerPoints">—</span><small>pts</small></b><span id="highestPlayerTeam">—</span></div></div></article>
+        <article class="panel chart-panel">
+          <div class="chart-title"><span id="performanceTitle">Gameweek performance</span> <em id="performanceNote">(top 6)</em></div>
+          <div id="performanceChart" class="svg-chart"></div>
+        </article>
+
+        <article class="panel chart-panel">
+          <div class="chart-title"><span id="positionTitle">League position trend</span> <em id="positionNote">(top 6)</em></div>
+          <div id="positionChart" class="svg-chart"></div>
+        </article>
+
+        <article class="panel winners-panel">
+          <div class="chart-title"><span id="winnersTitle">Recent GW winners</span></div>
+          <div id="gwWinners" class="winner-list"></div>
+        </article>
+
+        <article class="panel highest-panel">
+          <div class="chart-title mint">Highest scoring player <em id="highestGwLabel"></em></div>
+          <div class="highest-content">
+            <div class="shirt-icon" aria-hidden="true">👕</div>
+            <div>
+              <strong id="highestPlayer">—</strong>
+              <b><span id="highestPlayerPoints">—</span><small>pts</small></b>
+              <span id="highestPlayerTeam">—</span>
+            </div>
+          </div>
+        </article>
       </section>
     </main>
   </div>
+
   <div id="errorBanner" class="error-banner" hidden></div>
   <script src="script.js"></script>
 </body>
