@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#00e7cf">
   <title>Virtuoso FPL</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://db.onlinewebfonts.com" crossorigin>
+  <link href="https://db.onlinewebfonts.com/c/06c20358fc0c95da300413a9460c3d4b?family=Premier+League+W01+Bold" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -123,8 +122,8 @@
               <div><small>Median score</small><strong id="medianGwValue">—</strong><span>this gameweek</span></div>
             </article>
             <article class="quick-metric dark">
-              <span class="metric-icon" aria-hidden="true">⚡</span>
-              <div><small>Chips active</small><strong id="activeChipsValue">—</strong><span id="activeChipsDetail">this gameweek</span></div>
+              <span class="metric-icon" aria-hidden="true">☠</span>
+              <div><small>Bad week</small><strong id="badWeekValue">—</strong><span id="badWeekDetail">lowest GW score</span></div>
             </article>
             <article class="quick-metric dark">
               <span class="metric-icon" aria-hidden="true">🪑</span>
@@ -132,7 +131,7 @@
             </article>
           </div>
 
-          <div class="player-stat-grid">
+          <div class="player-stat-grid insight-three-grid">
             <article class="player-stat">
               <span class="round-icon small purple">C</span>
               <div><small>Most captained</small><strong id="mostCaptained">—</strong><b id="mostCaptainedPct">—</b><span>of managers</span></div>
@@ -147,7 +146,7 @@
             </article>
           </div>
 
-          <div class="lower-insight-grid">
+          <div class="lower-insight-grid insight-three-grid">
             <article class="compact-panel captain-panel">
               <div class="compact-title">Captain popularity</div>
               <div class="donut-row">
