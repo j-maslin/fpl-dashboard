@@ -131,14 +131,14 @@ function renderQuickMetrics(summary, rows) {
   const calculated = calculateLeagueMetrics(rows);
   const leadGap = Number(summary.lead_gap ?? calculated.leadGap ?? 0);
   const medianScore = Number(summary.median_gw ?? calculated.medianGw ?? 0);
-  const activeChips = Number(summary.active_chips ?? calculated.activeChips ?? 0);
+  const badWeek = summary.bad_week || calculated.badWeek || {};
   const benchPain = summary.bench_pain || calculated.benchPain || {};
 
   setText("leadGapValue", `${fmt(leadGap)} pts`);
   setText("leadGapDetail", rows.length > 1 ? "1st to 2nd" : "only manager");
   setText("medianGwValue", medianScore.toFixed(1));
-  setText("activeChipsValue", fmt(activeChips));
-  setText("activeChipsDetail", activeChips ? compactChipSummary(rows) : "none this gameweek");
+  setText("badWeekValue", `${fmt(badWeek.gw_points ?? badWeek.points ?? 0)} pts`);
+  setText("badWeekDetail", badWeek.team || badWeek.manager || "lowest GW score");
   setText("benchPainValue", `${fmt(benchPain.points ?? benchPain.bench_points ?? 0)} pts`);
   setText("benchPainDetail", Number(benchPain.points ?? benchPain.bench_points ?? 0) > 0 ? (benchPain.manager || benchPain.team || "points benched") : "no points benched");
 }
@@ -149,13 +149,14 @@ function calculateLeagueMetrics(rows) {
   const middle = Math.floor(scores.length / 2);
   const medianGw = scores.length === 0 ? 0 : (scores.length % 2 ? scores[middle] : (scores[middle - 1] + scores[middle]) / 2);
   const benchPain = rows.reduce((best, row) => Number(row.bench_points || 0) > Number(best.bench_points || 0) ? row : best, {});
+  const badWeek = rows.reduce((worst, row) => !Object.keys(worst).length || Number(row.gw_points || 0) < Number(worst.gw_points || 0) ? row : worst, {});
 
   return {
     leadGap: totals.length > 1 ? totals[0] - totals[1] : 0,
     leagueSpread: totals.length > 1 ? totals[0] - totals[totals.length - 1] : 0,
     medianGw,
-    activeChips: rows.filter((row) => row.active_chip).length,
-    benchPain
+    benchPain,
+    badWeek
   };
 }
 
@@ -166,15 +167,6 @@ function chipInfo(name) {
     cls: "other",
     full: String(name).replaceAll("_", " ")
   };
-}
-
-function compactChipSummary(rows) {
-  const counts = new Map();
-  rows.filter((row) => row.active_chip).forEach((row) => {
-    const chip = chipInfo(row.active_chip);
-    counts.set(chip.label, (counts.get(chip.label) || 0) + 1);
-  });
-  return [...counts.entries()].map(([label, count]) => `${label} ×${count}`).join(" · ");
 }
 
 function renderStandings(rows) {
